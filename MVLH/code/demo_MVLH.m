@@ -1,17 +1,18 @@
 function [] = demo_MVLH(bits, dataname)
-    clear all;
     warning off;
-    run = 1;
     bits = str2num(bits);
-    if dataname == 'flickr':
-        load('/Data/mir_cnn.mat');
-    elseif dataname == 'nuswide':
-        load('/Data/nus_cnn.mat');
-    elseif dataname == 'coco':
-        load('/Data/coco_cnn.mat');
-    else:
+    addpath('../../Data');
+    if dataname == 'flickr'
+        load('mir_cnn.mat');
+    elseif dataname == 'nuswide'
+        load('nus_cnn.mat');
+    elseif dataname == 'coco'
+        load('coco_cnn.mat');
+    else
         fprintf('ERROR dataname!');
+    end
 
+    run = 1;
     for rrr = 1:run
         lambda = 0.01;
         t = 2;
@@ -71,10 +72,11 @@ function [] = demo_MVLH(bits, dataname)
         %% evaluate
         Dhamm = hammingDist(Vbase + 2, Vquery + 2);
         [P] = perf_metric4Label(L_db, L_te, Dhamm);
-        map(rrr) = P
+        map(rrr) = P;
         toc
     end
-    fprintf('[%s-%s] MAP = %.4f\n', dataname, str(bits), mean(map));
-    open
-    fprintf(fid, '')
+    fprintf('[%s-%s] MAP = %.4f\n', dataname, num2str(bits), mean(map));
+    name = ['../result/' dataname '.txt'];
+    fid = fopen(name, 'a+');
+    fprintf(fid, '[%s-%s] MAP = %.4f\n', dataname, num2str(bits), mean(map));
 end
