@@ -2,6 +2,7 @@ function [] = demo_MVLH(bits, dataname)
     warning off;
     bits = str2num(bits);
     addpath('../../Data');
+
     if dataname == 'flickr'
         load('mir_cnn.mat');
     elseif dataname == 'nuswide'
@@ -13,6 +14,7 @@ function [] = demo_MVLH(bits, dataname)
     end
 
     run = 1;
+
     for rrr = 1:run
         lambda = 0.01;
         t = 2;
@@ -75,6 +77,7 @@ function [] = demo_MVLH(bits, dataname)
         map(rrr) = P;
         toc
     end
+
     fprintf('[%s-%s] MAP = %.4f\n', dataname, num2str(bits), mean(map));
     name = ['../result/' dataname '.txt'];
     fid = fopen(name, 'a+');
