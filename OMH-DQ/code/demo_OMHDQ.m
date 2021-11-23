@@ -6,7 +6,6 @@ function [] = demo_OMHDQ(bits, dataname)
     % Long description
 
     warning off;
-    clc;
 
     %% Dataset Loading
     addpath('../../Data');
