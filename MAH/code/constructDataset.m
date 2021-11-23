@@ -3,16 +3,16 @@ function exp_data = constructDataset(ko, nlandmarks, sigma, dataname)
     addpath('tools');
     addpath('../../Data');
 
-    if dataname == 'flickr'
+    if strcmp(dataname, 'flickr')
         load('mir_cnn.mat');
-    elseif dataname == 'nuswide'
+    elseif strcmp(dataname, 'nuswide')
         load('nus_cnn.mat');
-    elseif dataname == 'coco'
+    elseif strcmp(dataname, 'coco')
         load('coco_cnn.mat');
     else
         fprintf('ERROR dataname!');
     end
-
+    
     tic
     test_data_gist = I_te';
     test_data_sift = T_te';
