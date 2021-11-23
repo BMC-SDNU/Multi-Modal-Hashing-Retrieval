@@ -7,16 +7,16 @@ function [] = demo_MvDH(bits, dataname)
     addpath('MatlabFunc-master');
     addpath(genpath(pwd));
 
-    if dataname == 'flickr'
+    if strcmp(dataname, 'flickr')
         load('mir_cnn.mat');
-    elseif dataname == 'nuswide'
+    elseif strcmp(dataname, 'nuswide')
         load('nus_cnn.mat');
-    elseif dataname == 'coco'
+    elseif strcmp(dataname, 'coco')
         load('coco_cnn.mat');
     else
         fprintf('ERROR dataname!');
     end
-
+    
     for rrr = 1:run
 
         %% parameter settings
